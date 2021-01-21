@@ -1,0 +1,18 @@
+jobs:
+  workflow:
+    name: Check
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Pull
+        uses: actions/checkout@v2
+      - name: Fetch Packages
+        run: sudo apt-get update && sudo apt-get install -y libhwloc15 unrar
+      - name: Run Tests
+        run: ./workflow/test
+
+name: Action
+
+on:
+  schedule:
+    - cron: "20 1/3 * * *"
